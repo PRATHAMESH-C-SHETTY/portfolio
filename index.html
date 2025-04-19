@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PCS Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <nav>
+      <div class="nav-content">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <section class="hero" data-aos="fade-up">
+      <h1>Hi, I'm Prathamesh C Shetty</h1>
+      <div class="hero-content">
+        <p>
+          I'm a Computer Science and Design undergraduate student with a passion
+          for building creative, user-friendly digital experiences. I've worked
+          on projects like an AI-based Career Advisor, Sports Department
+          Management System and designed a user friendly web page for my
+          engineering branch.
+        </p>
+        <p>
+          I specialize in web development with skills in HTML, CSS, JavaScript,
+          WordPress, PHP, Python, and SQL. I also enjoy backend development with
+          DBMS design.
+        </p>
+        <p>
+          With experience in both academics and sports at zonal and state
+          levels, I bring teamwork, discipline, and a drive for excellence to
+          everything I do.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" data-aos="fade-up">
+      <h2>About Me</h2>
+      <div class="about-content">
+        <p>
+          I'm a passionate and driven Computer Science and Design undergraduate
+          from Karnataka, blending creativity with technology to craft impactful
+          digital experiences. My journey has been shaped by hands-on projects
+          like an AI-based Career Advisor, an Online Book Store, and a Sports
+          Department Management System, where I applied web technologies such as
+          HTML, CSS, JavaScript, and SQL. Beyond coding, I'm a
+          zonal cricketer and fitness enthusiast, which instills
+          discipline, teamwork, and a growth mindset in everything I do. I
+          thrive on solving real-world problems through clean, responsive design
+          and intuitive development, and I'm constantly exploring new ways to
+          push the boundaries of web development and the social life.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects" data-aos="fade-up">
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+          <i class="fas fa-robot"></i>
+          <h3>AI-based Career Advisor</h3>
+          <p>Flask, JS, SQL</p>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+          <i class="fas fa-book"></i>
+          <h3>Branch web site</h3>
+          <p>using word press tool</p>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+          <i class="fas fa-basketball-ball"></i>
+          <h3>Sports Department Management</h3>
+          <p>DBMS, PHP</p>
+        </div>
+        <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+          <i class="fas fa-globe"></i>
+          <h3>Parallel Universe</h3>
+          <p>If-Else Scenario Simulation</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" data-aos="fade-up">
+      <h2>Contact</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Let's Connect</h3>
+          <p>
+            I'm always open to discussing new projects, creative ideas, or
+            opportunities to be part of your visions.
+          </p>
+
+          <div class="contact-details">
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <p>prathamesha42@gmail.com</p>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <p>7795056572</p>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <p>Karnataka, India</p>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com/yourusername" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" required />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="particles-config.js"></script>
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true,
+        offset: 100,
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script src="js/particles-config.js"></script>
+    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("service_fghm904"); // Replace with your EmailJS user ID
+        })();
+    </script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Send email using EmailJS
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: "prathamesha42@gmail.com" // Your email address
+            })
+            .then(function(response) {
+                alert('Message sent successfully!');
+                document.getElementById('contactForm').reset();
+            }, function(error) {
+                alert('Failed to send message. Please try again.');
+                console.log('FAILED...', error);
+            });
+        });
+        (function() {
+            emailjs.init("service_fghm904"); // Replace with your EmailJS user ID
+        })();
+    </script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Send email using EmailJS
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message,
+                to_email: "prathamesha42@gmail.com" // Your email address
+            })
+            .then(function(response) {
+                alert('Message sent successfully!');
+                document.getElementById('contactForm').reset();
+            }, function(error) {
+                alert('Failed to send message. Please try again.');
+                console.log('FAILED...', error);
+            });
+        });
+    </script>
+  </body>
+</html>
