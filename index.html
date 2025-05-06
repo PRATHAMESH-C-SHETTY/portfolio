@@ -20,6 +20,11 @@
     <div id="particles-js"></div>
 
     <nav>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
       <div class="nav-content">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
@@ -156,6 +161,21 @@
       </div>
     </section>
 
+    <div class="bottom-nav">
+      <a href="#about" class="nav-item">
+        <i class="fas fa-user"></i>
+        <span>About</span>
+      </a>
+      <a href="#projects" class="nav-item">
+        <i class="fas fa-code"></i>
+        <span>Projects</span>
+      </a>
+      <a href="#contact" class="nav-item">
+        <i class="fas fa-envelope"></i>
+        <span>Contact</span>
+      </a>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="particles-config.js"></script>
     <script>
@@ -166,39 +186,10 @@
       });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
-    <script src="js/particles-config.js"></script>
+    <script src="particles-config.js"></script>
     <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script src="script.js"></script>
     <script>
-        (function() {
-            emailjs.init("service_fghm904"); // Replace with your EmailJS user ID
-        })();
-    </script>
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-
-            // Send email using EmailJS
-            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-                from_name: name,
-                from_email: email,
-                subject: subject,
-                message: message,
-                to_email: "prathamesha42@gmail.com" // Your email address
-            })
-            .then(function(response) {
-                alert('Message sent successfully!');
-                document.getElementById('contactForm').reset();
-            }, function(error) {
-                alert('Failed to send message. Please try again.');
-                console.log('FAILED...', error);
-            });
-        });
         (function() {
             emailjs.init("service_fghm904"); // Replace with your EmailJS user ID
         })();
