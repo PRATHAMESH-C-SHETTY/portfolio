@@ -53,9 +53,9 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe all sections and project cards
-document.querySelectorAll('section, .project-card').forEach(el => {
-  observer.observe(el);
-});
+//document.querySelectorAll('section, .project-card').forEach(el => {
+//  observer.observe(el);
+//});
 
 // Handle active state for bottom navigation
 const sections = document.querySelectorAll('section');
@@ -81,5 +81,82 @@ function setActiveNavItem() {
 }
 
 window.addEventListener('scroll', setActiveNavItem);
-window.addEventListener('load', setActiveNavItem); 
+window.addEventListener('load', setActiveNavItem);
+
+// Interactive parallax effect for waves background
+const wavesBg = document.querySelector('.waves-bg');
+if (wavesBg) {
+  const wave1 = wavesBg.querySelector('.wave1');
+  const wave2 = wavesBg.querySelector('.wave2');
+  window.addEventListener('mousemove', (e) => {
+    const x = e.clientX / window.innerWidth;
+    if (wave1) wave1.style.transform = `translateX(${-x * 40}px)`;
+    if (wave2) wave2.style.transform = `translateX(${-x * 80}px)`;
+  });
+  wavesBg.addEventListener('mouseleave', () => {
+    if (wave1) wave1.style.transform = '';
+    if (wave2) wave2.style.transform = '';
+  });
+}
+
+// Dark/Light mode toggle functionality
+const themeToggle = document.getElementById('themeToggle');
+const toggleThumb = themeToggle ? themeToggle.querySelector('.toggle-thumb') : null;
+const toggleIcon = toggleThumb ? toggleThumb.querySelector('i') : null;
+
+function setTheme(mode) {
+  if (mode === 'light') {
+    document.body.classList.add('light-mode');
+    themeToggle.classList.add('light');
+    if (toggleIcon) {
+      toggleIcon.classList.remove('fa-moon');
+      toggleIcon.classList.add('fa-sun');
+    }
+    localStorage.setItem('theme', 'light');
+  } else {
+    document.body.classList.remove('light-mode');
+    themeToggle.classList.remove('light');
+    if (toggleIcon) {
+      toggleIcon.classList.remove('fa-sun');
+      toggleIcon.classList.add('fa-moon');
+    }
+    localStorage.setItem('theme', 'dark');
+  }
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-mode');
+    themeToggle.classList.toggle('light', isLight);
+    if (toggleIcon) {
+      toggleIcon.classList.toggle('fa-sun', isLight);
+      toggleIcon.classList.toggle('fa-moon', !isLight);
+    }
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  });
+  // On load, set theme from localStorage
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') setTheme('light');
+  else setTheme('dark');
+}
+
+// Animated letter-by-letter effect for Welcome to My Portfolio
+window.addEventListener('DOMContentLoaded', () => {
+  const title = document.getElementById('animated-title');
+  if (title) {
+    const text = title.textContent;
+    title.textContent = '';
+    let i = 0;
+    function typeLetter() {
+      if (i < text.length) {
+        title.textContent += text[i];
+        i++;
+        setTimeout(typeLetter, 60);
+      } else {
+        title.textContent = text; // Ensure full text at end
+      }
+    }
+    typeLetter();
+  }
+}); 
 
