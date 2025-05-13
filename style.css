@@ -831,13 +831,14 @@ header .container {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   flex-grow: 1;
+  justify-content: space-between;
 }
 
 .project-content h3 {
   font-size: 1.3rem;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
 }
 
 .project-tags {
@@ -861,7 +862,10 @@ header .container {
 
 .project-hover {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(5px);
   opacity: 0;
@@ -870,6 +874,7 @@ header .container {
   overflow-y: auto;
   display: block;
   box-sizing: border-box;
+  z-index: 2;
 }
 
 .project-card:hover .project-hover {
@@ -883,13 +888,14 @@ header .container {
 
 .project-hover-content h3 {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
   color: var(--primary-color);
 }
 
 .project-hover-content p {
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .project-features {
@@ -918,8 +924,6 @@ header .container {
   text-align: center;
   margin-top: 3rem;
 }
-
-
 
 /* ===== SKILLS SECTION ===== */
 .tech-grid {
