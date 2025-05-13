@@ -802,9 +802,10 @@ header .container {
   overflow: hidden;
   transition: var(--transition);
   position: relative;
-  height: 350px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: 350px;
 }
 
 .project-card:hover {
@@ -818,6 +819,7 @@ header .container {
   align-items: center;
   justify-content: center;
   background: var(--gradient-1);
+  flex-shrink: 0;
 }
 
 .project-img i {
@@ -827,15 +829,15 @@ header .container {
 
 .project-content {
   padding: 1.5rem;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-grow: 1;
 }
 
 .project-content h3 {
   font-size: 1.3rem;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem 0;
 }
 
 .project-tags {
@@ -845,29 +847,28 @@ header .container {
 }
 
 .project-desc {
-  margin-bottom: 1.5rem;
   font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
 }
 
 .project-links {
   display: flex;
   gap: 0.8rem;
   margin-top: auto;
+  flex-wrap: wrap;
 }
 
 .project-hover {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(5px);
   opacity: 0;
   transition: var(--transition);
   padding: 2rem 1.5rem;
   overflow-y: auto;
-  display: block; /* changed from flex to block */
+  display: block;
   box-sizing: border-box;
 }
 
@@ -884,11 +885,11 @@ header .container {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: var(--primary-color);
-  margin-top: 0; /* prevent any accidental top spacing */
 }
 
 .project-hover-content p {
   margin-bottom: 1.5rem;
+  font-size: 0.95rem;
 }
 
 .project-features {
@@ -910,12 +911,14 @@ header .container {
   position: absolute;
   left: 0;
   font-size: 1.2rem;
+  line-height: 1;
 }
 
 .projects-cta {
   text-align: center;
   margin-top: 3rem;
 }
+
 
 
 /* ===== SKILLS SECTION ===== */
