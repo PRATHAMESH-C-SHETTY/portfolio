@@ -1,566 +1,689 @@
-// Wait for DOM to be fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-  // Initialize particles.js
-  if (typeof particlesJS !== 'undefined') {
-    initParticles();
-  }
-
-  // Initialize theme toggle
-  initThemeToggle();
-
-  // Initialize smooth scrolling
-  initSmoothScroll();
-
-  // Initialize mobile navigation
-  initMobileNav();
-
-  // Initialize scroll animations
-  initScrollAnimations();
-
-  // Initialize project filters
-  initProjectFilters();
-
-  // Initialize testimonial slider
-  initTestimonialSlider();
-
-  // Initialize skill bars animation
-  initSkillBars();
-
-  // Initialize counter animation
-  initCounters();
-
-  // Initialize form submission
-  initContactForm();
-});
-
-// Theme Toggle Functionality
-function initThemeToggle() {
-  const themeSwitch = document.getElementById('theme-switch');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Prathamesh C Shetty | Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Prathamesh C Shetty - Computer Science and Design undergraduate">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Particle Background -->
+  <div id="particles-js"></div>
   
-  // Check for saved theme preference or prefer-color-scheme
-  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-  const savedTheme = localStorage.getItem('theme');
-  
-  if (savedTheme === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    themeSwitch.checked = true;
-  } else if (savedTheme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    themeSwitch.checked = false;
-  } else if (prefersDarkScheme.matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    themeSwitch.checked = false;
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    themeSwitch.checked = false;
-  }
-  
-  themeSwitch.addEventListener('change', function() {
-    if (this.checked) {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-    }
-  });
-}
+  <!-- Animated Waves Background -->
+  <div class="waves-container">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
 
-// Smooth Scrolling for Navigation Links
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        // Adjust scroll position to account for fixed header
-        const headerHeight = document.querySelector('header').offsetHeight;
-        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-        
-        // Update active nav link
-        updateActiveNavLink(this.getAttribute('href'));
-      }
-    });
-  });
-}
+  <!-- SVG Animated Waves -->
+  <div class="svg-waves-bg">
+    <svg class="svg-wave svg-wave1" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#0099ff" fill-opacity="0.2" d="M0,160L60,154.7C120,149,240,139,360,154.7C480,171,600,213,720,197.3C840,181,960,107,1080,101.3C1200,96,1320,160,1380,192L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+    </svg>
+    <svg class="svg-wave svg-wave2" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#0099ff" fill-opacity="0.15" d="M0,224L60,197.3C120,171,240,117,360,117.3C480,117,600,171,720,197.3C840,224,960,224,1080,197.3C1200,171,1320,85,1380,42.7L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+    </svg>
+    <svg class="svg-wave svg-wave3" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path fill="#0099ff" fill-opacity="0.1" d="M0,288L60,272C120,256,240,224,360,197.3C480,171,600,149,720,160C840,171,960,213,1080,197.3C1200,181,1320,107,1380,69.3L1440,32L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+    </svg>
+  </div>
 
-// Mobile Navigation
-function initMobileNav() {
-  const hamburger = document.querySelector('.hamburger');
-  const navContent = document.querySelector('.nav-content');
-  
-  if (hamburger && navContent) {
-    hamburger.addEventListener('click', function() {
-      this.classList.toggle('active');
-      navContent.classList.toggle('active');
-    });
-    
-    // Close menu when clicking a nav link
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navContent.classList.remove('active');
-      });
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !navContent.contains(e.target)) {
-        hamburger.classList.remove('active');
-        navContent.classList.remove('active');
-      }
-    });
-  }
-  
-  // Handle active state for bottom navigation
-  const navItems = document.querySelectorAll('.nav-item');
-  
-  window.addEventListener('scroll', function() {
-    updateActiveNavOnScroll();
-  });
-}
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <input type="checkbox" id="theme-switch" class="theme-switch">
+    <label for="theme-switch" class="theme-label">
+      <i class="fas fa-sun"></i>
+      <i class="fas fa-moon"></i>
+      <div class="ball"></div>
+    </label>
+  </div>
 
-// Update active navigation link
-function updateActiveNavLink(href) {
-  document.querySelectorAll('.nav-link, .nav-item').forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === href) {
-      link.classList.add('active');
-    }
-  });
-}
-
-// Update active navigation based on scroll position
-function updateActiveNavOnScroll() {
-  const sections = document.querySelectorAll('section');
-  const navLinks = document.querySelectorAll('.nav-link, .nav-item');
-  
-  let current = '';
-  
-  sections.forEach(section => {
-    const sectionTop = section.offsetTop;
-    const sectionHeight = section.clientHeight;
-    const headerHeight = document.querySelector('header').offsetHeight;
-    
-    if (window.scrollY >= (sectionTop - headerHeight - 100)) {
-      current = section.getAttribute('id');
-    }
-  });
-  
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === `#${current}`) {
-      link.classList.add('active');
-    }
-  });
-}
-
-// Scroll Animations
-function initScrollAnimations() {
-  const animatedElements = document.querySelectorAll('.project-card, .tech-card, .skill-bar, .timeline-item, .testimonial-card');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        
-        // Animate skill bars when they come into view
-        if (entry.target.classList.contains('skill-bar')) {
-          const skillFill = entry.target.querySelector('.skill-fill');
-          const skillPercent = entry.target.querySelector('.skill-info span:last-child').textContent;
-          skillFill.style.width = skillPercent;
-        }
-        
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
-  
-  animatedElements.forEach(el => {
-    observer.observe(el);
-  });
-}
-
-// Project Filters
-function initProjectFilters() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
-  
-  if (filterBtns.length && projectCards.length) {
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        // Remove active class from all buttons
-        filterBtns.forEach(btn => btn.classList.remove('active'));
-        
-        // Add active class to clicked button
-        this.classList.add('active');
-        
-        const filter = this.getAttribute('data-filter');
-        
-        projectCards.forEach(card => {
-          if (filter === 'all') {
-            card.style.display = 'block';
-          } else {
-            const categories = card.getAttribute('data-category').split(' ');
-            if (categories.includes(filter)) {
-              card.style.display = 'block';
-            } else {
-              card.style.display = 'none';
-            }
-          }
-        });
-      });
-    });
-  }
-}
-
-// Testimonial Slider
-function initTestimonialSlider() {
-  const track = document.querySelector('.testimonial-track');
-  const slides = document.querySelectorAll('.testimonial-slide');
-  const dots = document.querySelectorAll('.testimonial-dot');
-  const prevBtn = document.querySelector('.testimonial-prev');
-  const nextBtn = document.querySelector('.testimonial-next');
-  
-  if (track && slides.length && dots.length) {
-    let currentIndex = 0;
-    
-    // Set initial position
-    updateSlider();
-    
-    // Previous button click
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex > 0) ? currentIndex - 1 : slides.length - 1;
-      updateSlider();
-    });
-    
-    // Next button click
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
-      updateSlider();
-    });
-    
-    // Dot clicks
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        currentIndex = index;
-        updateSlider();
-      });
-    });
-    
-    // Auto slide
-    let interval = setInterval(() => {
-      currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
-      updateSlider();
-    }, 5000);
-    
-    // Pause on hover
-    track.addEventListener('mouseenter', () => {
-      clearInterval(interval);
-    });
-    
-    track.addEventListener('mouseleave', () => {
-      interval = setInterval(() => {
-        currentIndex = (currentIndex < slides.length - 1) ? currentIndex + 1 : 0;
-        updateSlider();
-      }, 5000);
-    });
-    
-    // Update slider position and active dot
-    function updateSlider() {
-      track.style.transform = `translateX(-${currentIndex * 100}%)`;
-      
-      dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentIndex);
-      });
-    }
-  }
-}
-
-// Skill Bars Animation
-function initSkillBars() {
-  const skillBars = document.querySelectorAll('.skill-bar');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const skillFill = entry.target.querySelector('.skill-fill');
-        const skillPercent = entry.target.querySelector('.skill-info span:last-child').textContent;
-        
-        setTimeout(() => {
-          skillFill.style.width = skillPercent;
-        }, 200);
-        
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-  
-  skillBars.forEach(bar => {
-    observer.observe(bar);
-  });
-}
-
-// Counter Animation
-function initCounters() {
-  const counters = document.querySelectorAll('.counter');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const counter = entry.target;
-        const target = parseInt(counter.getAttribute('data-target'));
-        const duration = 2000; // ms
-        const step = target / (duration / 16);
-        let current = 0;
-        
-        const updateCounter = () => {
-          current += step;
-          if (current < target) {
-            counter.textContent = Math.ceil(current);
-            requestAnimationFrame(updateCounter);
-          } else {
-            counter.textContent = target;
-          }
-        };
-        
-        updateCounter();
-        observer.unobserve(counter);
-      }
-    });
-  }, {
-    threshold: 0.5
-  });
-  
-  counters.forEach(counter => {
-    observer.observe(counter);
-  });
-}
-
-// Contact Form Submission with EmailJS
-function initContactForm() {
-  const contactForm = document.getElementById('contactForm');
-  
-  if (contactForm) {
-    // Initialize EmailJS
-    emailjs.init("ogK_McmtKQzThMG6V"); // Replace with your actual EmailJS public key
-    
-    contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Get form values
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const subject = document.getElementById('subject').value;
-      const message = document.getElementById('message').value;
-      
-      // Show loading state
-      const submitBtn = contactForm.querySelector('.submit-btn');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
-      submitBtn.disabled = true;
-      
-      // EmailJS template parameters
-      const templateParams = {
-        from_name: name,
-        from_email: email,
-        subject: subject,
-        message: message,
-        to_name: 'Prathamesh C Shetty'
-      };
-      
-      // Send email using EmailJS
-      emailjs.send('service_rpe170c', 'template_g38ng2f', templateParams)
-        .then(function(response) {
-          console.log('SUCCESS!', response.status, response.text);
-          
-          // Show success message
-          showNotification('Message sent successfully! I will get back to you soon.', 'success');
-          
-          // Reset form
-          contactForm.reset();
-        })
-        .catch(function(error) {
-          console.log('FAILED...', error);
-          
-          // Show error message
-          showNotification('Failed to send message. Please try again later.', 'error');
-        })
-        .finally(function() {
-          // Reset button state
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-        });
-    });
-  }
-}
-
-// Notification function
-function showNotification(message, type = 'success') {
-  // Create notification element
-  const notification = document.createElement('div');
-  notification.className = `notification notification-${type}`;
-  notification.innerHTML = `
-    <div class="notification-content">
-      <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
-      <span>${message}</span>
-      <button class="notification-close">
-        <i class="fas fa-times"></i>
-      </button>
+  <!-- Header & Navigation -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <a href="#home">PCS</a>
+      </div>
+      <nav>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-content">
+          <a href="#home" class="nav-link active">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+      </nav>
     </div>
-  `;
-  
-  // Add styles
-  notification.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: ${type === 'success' ? '#4CAF50' : '#f44336'};
-    color: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 10000;
-    transform: translateX(100%);
-    transition: transform 0.3s ease;
-    max-width: 400px;
-  `;
-  
-  // Add to page
-  document.body.appendChild(notification);
-  
-  // Animate in
-  setTimeout(() => {
-    notification.style.transform = 'translateX(0)';
-  }, 100);
-  
-  // Auto remove after 5 seconds
-  setTimeout(() => {
-    removeNotification(notification);
-  }, 5000);
-  
-  // Close button functionality
-  const closeBtn = notification.querySelector('.notification-close');
-  closeBtn.addEventListener('click', () => {
-    removeNotification(notification);
-  });
-}
+  </header>
 
-function removeNotification(notification) {
-  notification.style.transform = 'translateX(100%)';
-  setTimeout(() => {
-    if (notification.parentNode) {
-      notification.parentNode.removeChild(notification);
-    }
-  }, 300);
-}
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="animate-text">Hi, I'm <span class="highlight">Prathamesh C Shetty</span></h1>
+            <h2 class="animate-text delay-1">Computer Science & Design Student</h2>
+            <p class="animate-text delay-2">
+              I build creative, user-friendly digital experiences with a passion for clean code and intuitive design.
+            </p>
+            <div class="hero-buttons animate-text delay-3">
+              <!--<a href="#projects" class="btn btn-primary">View My Work</a>
+              <a href="#contact" class="btn btn-secondary">Get In Touch</a>-->
+            </div>
+          </div>
+          <div class="hero-image animate-fade-in">
+            <div class="profile-shape">
+              <div class="profile-img-placeholder">
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <a href="#about">
+            <div class="mouse">
+              <div class="wheel"></div>
+            </div>
+            <div class="arrow">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
 
-// Initialize Particles.js
-let particlesJS; // Declare particlesJS
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I'm a passionate and driven Computer Science and Design undergraduate from Karnataka, blending creativity with technology to craft impactful digital experiences.
+            </p>
+            <p>
+              My journey has been shaped by hands-on projects like an AI-based Career Advisor, an Online Book Store, and a Sports Department Management System, where I applied web technologies such as HTML, CSS, JavaScript, and SQL.
+            </p>
+            <p>
+              Beyond coding, I'm a zonal cricketer and fitness enthusiast, which instills discipline, teamwork, and a growth mindset in everything I do.
+            </p>
+            <div class="about-stats">
+              <div class="stat-item">
+                <div class="stat-number"><span class="counter" data-target="15">0</span>+</div>
+                <div class="stat-title">Projects</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number"><span class="counter" data-target="8">0</span>+</div>
+                <div class="stat-title">Clients</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number"><span class="counter" data-target="12">0</span>+</div>
+                <div class="stat-title">Technologies</div>
+              </div>
+            </div>
+            <div class="about-buttons">
+              <!--<a href="#" class="btn btn-primary">Download CV</a>
+              <a href="#contact" class="btn btn-secondary">Contact Me</a>
+            </div>-->
+          </div>
+          <div class="about-skills">
+            <h3>My Skills</h3>
+            <div class="skill-bars">
+              <div class="skill-bar">
+                <div class="skill-info">
+                  <span>HTML/CSS</span>
+                  <span>90%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-fill" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-info">
+                  <span>JavaScript</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-fill" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-info">
+                  <span>Python</span>
+                  <span>80%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-fill" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-info">
+                  <span>PHP</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-fill" style="width: 75%"></div>
+                </div>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-info">
+                  <span>SQL</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-progress">
+                  <div class="skill-fill" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-function initParticles() {
-  particlesJS = window.particlesJS; // Assign window.particlesJS to the declared variable
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">My Projects</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="project-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="design">Design</button>
+          <button class="filter-btn" data-filter="ai">AI</button>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card" data-category="ai">
+            <div class="project-img">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div class="project-content">
+              <h3>AI-based Career Advisor</h3>
+              <p class="project-tags">Flask, JS, SQL</p>
+              <p class="project-desc">An intelligent career guidance system using AI to help students choose their career paths.</p>
+              <div class="project-links">
+                <a href="#" class="btn btn-sm">View Project</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
+              </div>
+            </div>
+            <div class="project-hover">
+              <div class="project-hover-content">
+                <h3>AI-based Career Advisor</h3>
+                <p>This project uses machine learning algorithms to analyze student preferences, skills, and aptitude to recommend suitable career paths.</p>
+                <ul class="project-features">
+                  <li>Personalized career recommendations</li>
+                  <li>Skill assessment tools</li>
+                  <li>Industry trends analysis</li>
+                  <li>Educational pathway guidance</li>
+                </ul>
+                <div class="project-links">
+                  <a href="#" class="btn btn-sm">Live Demo</a>
+                  <a href="#" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Repository</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-card" data-category="web design">
+            <div class="project-img">
+              <i class="fas fa-book"></i>
+            </div>
+            <div class="project-content">
+              <h3>Branch Website</h3>
+              <p class="project-tags">WordPress, CSS, PHP</p>
+              <p class="project-desc">A comprehensive website for my engineering branch using WordPress.</p>
+              <div class="project-links">
+                <a href="#" class="btn btn-sm">View Project</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
+              </div>
+            </div>
+            <div class="project-hover">
+              <div class="project-hover-content">
+                <h3>Branch Website</h3>
+                <p>Designed and developed a user-friendly website for my engineering branch to showcase department activities, faculty profiles, and student achievements.</p>
+                <ul class="project-features">
+                  <li>Custom WordPress theme</li>
+                  <li>Responsive design</li>
+                  <li>Event calendar integration</li>
+                  <li>Faculty directory</li>
+                </ul>
+                <div class="project-links">
+                  <a href="#" class="btn btn-sm">Live Demo</a>
+                  <a href="#" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Repository</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-card" data-category="web">
+            <div class="project-img">
+              <i class="fas fa-basketball-ball"></i>
+            </div>
+            <div class="project-content">
+              <h3>Sports Department Management</h3>
+              <p class="project-tags">DBMS, PHP, MySQL</p>
+              <p class="project-desc">A comprehensive system to manage sports activities, equipment, and events.</p>
+              <div class="project-links">
+                <a href="#" class="btn btn-sm">View Project</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
+              </div>
+            </div>
+            <div class="project-hover">
+              <div class="project-hover-content">
+                <h3>Sports Department Management</h3>
+                <p>Developed a complete management system for college sports department to streamline equipment inventory, event scheduling, and team management.</p>
+                <ul class="project-features">
+                  <li>Equipment inventory tracking</li>
+                  <li>Event scheduling system</li>
+                  <li>Team and player profiles</li>
+                  <li>Tournament management</li>
+                </ul>
+                <div class="project-links">
+                  <a href="#" class="btn btn-sm">Live Demo</a>
+                  <a href="#" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Repository</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="project-card" data-category="design ai">
+            <div class="project-img">
+              <i class="fas fa-globe"></i>
+            </div>
+            <div class="project-content">
+              <h3>Parallel Universe</h3>
+              <p class="project-tags">JavaScript, HTML5, CSS3</p>
+              <p class="project-desc">An interactive "If-Else" scenario simulation exploring alternate realities.</p>
+              <div class="project-links">
+                <a href="#" class="btn btn-sm">View Project</a>
+                <a href="#" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Code</a>
+              </div>
+            </div>
+            <div class="project-hover">
+              <div class="project-hover-content">
+                <h3>Parallel Universe</h3>
+                <p>Created an interactive web experience that allows users to explore different life scenarios and outcomes based on their choices.</p>
+                <ul class="project-features">
+                  <li>Interactive storytelling</li>
+                  <li>Decision tree visualization</li>
+                  <li>Animated transitions</li>
+                  <li>Outcome probability analysis</li>
+                </ul>
+                <div class="project-links">
+                  <a href="#" class="btn btn-sm">Live Demo</a>
+                  <a href="#" class="btn btn-sm btn-outline"><i class="fab fa-github"></i> Repository</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--<div class="projects-cta">
+          <a href="#" class="btn btn-primary">View All Projects</a>
+        </div>-->
+      </div>
+    </section>
 
-  if (typeof particlesJS === 'function') {
-    particlesJS('particles-js', {
-      particles: {
-        number: {
-          value: 80,
-          density: {
-            enable: true,
-            value_area: 800
-          }
-        },
-        color: {
-          value: ["#ffffff", "#0099ff", "#00ccff"]
-        },
-        shape: {
-          type: "circle",
-          stroke: {
-            width: 0,
-            color: "#000000"
-          }
-        },
-        opacity: {
-          value: 0.5,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 1,
-            opacity_min: 0.1,
-            sync: false
-          }
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 2,
-            size_min: 0.1,
-            sync: false
-          }
-        },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#0099ff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 2,
-          direction: "none",
-          random: true,
-          straight: false,
-          out_mode: "out",
-          bounce: false,
-          attract: {
-            enable: true,
-            rotateX: 600,
-            rotateY: 1200
-          }
-        }
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: {
-            enable: true,
-            mode: "grab"
-          },
-          onclick: {
-            enable: true,
-            mode: "push"
-          },
-          resize: true
-        },
-        modes: {
-          grab: {
-            distance: 140,
-            line_linked: {
-              opacity: 1
-            }
-          },
-          push: {
-            particles_nb: 4
-          }
-        }
-      },
-      retina_detect: true
-    });
-  } else {
-    console.warn('particlesJS not properly loaded. Make sure the particles.js library is included.');
-  }
-}
+    <!-- Skills Section -->
+    <section id="skills" class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Technologies I Work With</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <i class="fab fa-html5"></i>
+            <h3>HTML5</h3>
+            <p>Semantic markup, accessibility, and modern web standards</p>
+          </div>
+          <div class="tech-card">
+            <i class="fab fa-css3-alt"></i>
+            <h3>CSS3</h3>
+            <p>Responsive design, animations, and modern layouts</p>
+          </div>
+          <div class="tech-card">
+            <i class="fab fa-js"></i>
+            <h3>JavaScript</h3>
+            <p>ES6+, DOM manipulation, and interactive experiences</p>
+          </div>
+          <div class="tech-card">
+            <i class="fab fa-python"></i>
+            <h3>Python</h3>
+            <p>Flask, data analysis, and backend development</p>
+          </div>
+          <div class="tech-card">
+            <i class="fab fa-php"></i>
+            <h3>PHP</h3>
+            <p>Server-side scripting and dynamic web applications</p>
+          </div>
+          <div class="tech-card">
+            <i class="fas fa-database"></i>
+            <h3>SQL</h3>
+            <p>Database design, queries, and management systems</p>
+          </div>
+          <div class="tech-card">
+            <i class="fab fa-wordpress"></i>
+            <h3>WordPress</h3>
+            <p>Theme development, customization, and content management</p>
+          </div>
+          <div class="tech-card">
+            <i class="fab fa-git-alt"></i>
+            <h3>Git</h3>
+            <p>Version control, collaboration, and project management</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">My Journey</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2023</div>
+            <div class="timeline-content">
+              <h3>Computer Science Undergraduate</h3>
+              <p>Pursuing my degree with focus on web development and AI</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2022</div>
+            <div class="timeline-content">
+              <h3>First Major Project</h3>
+              <p>Developed the AI-based Career Advisor system</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2021</div>
+            <div class="timeline-content">
+              <h3>Web Development Internship</h3>
+              <p>Gained practical experience in building responsive websites</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2020</div>
+            <div class="timeline-content">
+              <h3>Started Learning Programming</h3>
+              <p>Began my journey with HTML, CSS, and JavaScript</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section 
+    <section id="testimonials" class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">What People Say</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="testimonial-slider">
+          <div class="testimonial-track">
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-quote">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <p class="testimonial-text">
+                  Prathamesh delivered an exceptional website for our department. His attention to detail and creative approach made our online presence stand out.
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="testimonial-info">
+                    <h4>Dr. Rajesh Kumar</h4>
+                    <p>Department Head</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-quote">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <p class="testimonial-text">
+                  Working with Prathamesh on our sports management system was a pleasure. He understood our requirements perfectly and delivered a solution that exceeded our expectations.
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="testimonial-info">
+                    <h4>Sunil Patil</h4>
+                    <p>Sports Director</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-slide">
+              <div class="testimonial-card">
+                <div class="testimonial-quote">
+                  <i class="fas fa-quote-left"></i>
+                </div>
+                <p class="testimonial-text">
+                  The AI Career Advisor project developed by Prathamesh has been instrumental in helping our students make informed career choices. Highly recommended!
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">
+                    <i class="fas fa-user"></i>
+                  </div>
+                  <div class="testimonial-info">
+                    <h4>Priya Sharma</h4>
+                    <p>Career Counselor</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-controls">
+            <button class="testimonial-prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="testimonial-dots">
+              <span class="testimonial-dot active"></span>
+              <span class="testimonial-dot"></span>
+              <span class="testimonial-dot"></span>
+            </div>
+            <button class="testimonial-next"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  -->
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Get In Touch</h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>Let's Connect</h3>
+            <p>
+              I'm always open to discussing new projects, creative ideas, or
+              opportunities to be part of your visions.
+            </p>
+
+            <div class="contact-details">
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <h4>Email</h4>
+                  <p>prathamesha42@gmail.com</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <div>
+                  <h4>Phone</h4>
+                  <p>7795056572</p>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <h4>Location</h4>
+                  <p>Karnataka, India</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="social-links">
+              <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="https://instagram.com/yourusername" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-form-container">
+            <form id="contactForm" class="contact-form">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <div class="input-group">
+                  <i class="fas fa-user"></i>
+                  <input type="text" id="name" name="name" required placeholder="Your Name" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-group">
+                  <i class="fas fa-envelope"></i>
+                  <input type="email" id="email" name="email" required placeholder="Your Email" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <div class="input-group">
+                  <i class="fas fa-pen"></i>
+                  <input type="text" id="subject" name="subject" required placeholder="Subject" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <div class="input-group">
+                  <i class="fas fa-comment-alt"></i>
+                  <textarea id="message" name="message" rows="5" required placeholder="Your Message"></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary submit-btn">
+                <span>Send Message</span>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <h3>Prathamesh C Shetty</h3>
+          <p>Computer Science & Design Student</p>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-social">
+          <h4>Connect With Me</h4>
+          <div class="social-links">
+            <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://instagram.com/yourusername" target="_blank" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Prathamesh C Shetty. All Rights Reserved.</p>
+        <div class="back-to-top">
+          <a href="#home" aria-label="Back to top">
+            <i class="fas fa-arrow-up"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Mobile Navigation -->
+  <div class="bottom-nav">
+    <a href="#home" class="nav-item active">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </a>
+    <a href="#about" class="nav-item">
+      <i class="fas fa-user"></i>
+      <span>About</span>
+    </a>
+    <a href="#projects" class="nav-item">
+      <i class="fas fa-code"></i>
+      <span>Projects</span>
+    </a>
+    <a href="#skills" class="nav-item">
+      <i class="fas fa-laptop-code"></i>
+      <span>Skills</span>
+    </a>
+    <a href="#contact" class="nav-item">
+      <i class="fas fa-envelope"></i>
+      <span>Contact</span>
+    </a>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="particles-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
