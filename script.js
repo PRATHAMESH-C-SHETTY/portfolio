@@ -347,11 +347,14 @@ function initCounters() {
   });
 }
 
-// Contact Form Submission
+// Contact Form Submission with EmailJS
 function initContactForm() {
   const contactForm = document.getElementById('contactForm');
   
   if (contactForm) {
+    // Initialize EmailJS
+    emailjs.init("ogK_McmtKQzThMG6V"); // Replace with your actual EmailJS public key
+    
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
       
@@ -361,17 +364,105 @@ function initContactForm() {
       const subject = document.getElementById('subject').value;
       const message = document.getElementById('message').value;
       
-      // Here you would typically send the form data to a server
-      // For now, we'll just log it and show a success message
-      console.log('Form submitted:', { name, email, subject, message });
+      // Show loading state
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+      submitBtn.disabled = true;
       
-      // Show success message (you could create a more sophisticated notification)
-      alert('Message sent successfully! I will get back to you soon.');
+      // EmailJS template parameters
+      const templateParams = {
+        from_name: name,
+        from_email: email,
+        subject: subject,
+        message: message,
+        to_name: 'Prathamesh C Shetty'
+      };
       
-      // Reset form
-      contactForm.reset();
+      // Send email using EmailJS
+      emailjs.send('service_rpe170c', 'template_g38ng2f', templateParams)
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+          
+          // Show success message
+          showNotification('Message sent successfully! I will get back to you soon.', 'success');
+          
+          // Reset form
+          contactForm.reset();
+        })
+        .catch(function(error) {
+          console.log('FAILED...', error);
+          
+          // Show error message
+          showNotification('Failed to send message. Please try again later.', 'error');
+        })
+        .finally(function() {
+          // Reset button state
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        });
     });
   }
+}
+
+// Notification function
+function showNotification(message, type = 'success') {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.innerHTML = `
+    <div class="notification-content">
+      <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+      <span>${message}</span>
+      <button class="notification-close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  `;
+  
+  // Add styles
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    max-width: 400px;
+  `;
+  
+  // Add to page
+  document.body.appendChild(notification);
+  
+  // Animate in
+  setTimeout(() => {
+    notification.style.transform = 'translateX(0)';
+  }, 100);
+  
+  // Auto remove after 5 seconds
+  setTimeout(() => {
+    removeNotification(notification);
+  }, 5000);
+  
+  // Close button functionality
+  const closeBtn = notification.querySelector('.notification-close');
+  closeBtn.addEventListener('click', () => {
+    removeNotification(notification);
+  });
+}
+
+function removeNotification(notification) {
+  notification.style.transform = 'translateX(100%)';
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.parentNode.removeChild(notification);
+    }
+  }, 300);
 }
 
 // Initialize Particles.js
